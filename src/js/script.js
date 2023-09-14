@@ -11,8 +11,8 @@
         /* walk through every element in dataSource.books */
         for (let elem in dataSource.books) {
             /* generate HTML code based on template and each book data */
-            const generatedHTML = templateBook;
-            /* generate DOM element */
+            const generatedHTML = templateBook(dataSource.books[elem]);
+            /* generate DOM element based on generated HTML */
             thisBook.element = utils.createDOMFromHTML(generatedHTML);
             /* add generated DOM element as a child element to the .books-list */
             bookContainer.appendChild(thisBook.element);
