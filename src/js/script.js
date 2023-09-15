@@ -34,12 +34,20 @@
             book.addEventListener('dbclick', function (event) {
                 /* prevent default action */
                 event.preventDefault();
-                /* add class favorite to every cdbclicked element */
-                book.classList.add('favorite');
+                /* check if book isn't in avorite list */
+                if(!book.getAttribute('class') == '.favorite'){
+                    /* add class favorite to every cdbclicked element */
+                book.classList.add('.favorite');
                 /* get id from data-id id of the element */
-                const dataId = book.getAttribute('data-id');
+                const dataId = book.getAttribute('#data-id');
                 /* add this id to favoriteBooks array */
                 favoriteBooks.push(dataId);
+                } else {
+                    /* remove book from favoriteBooks array */
+                    favoriteBooks.indexOf(book).splice(book, 1);
+                    /* remove class favorite from book */
+                    book.classList.remove('.favorite');
+                }
             });
         }
     }
