@@ -35,7 +35,7 @@
                 /* prevent default action */
                 event.preventDefault();
                 /* check if book isn't in avorite list */
-                if(!book.classList.contains('class') == 'favorite'){
+                if(!book.classList.contains('favorite')){
                     /* add class favorite to every cdbclicked element */
                 book.classList.add('favorite');
                 /* get id from data-id id of the element */
