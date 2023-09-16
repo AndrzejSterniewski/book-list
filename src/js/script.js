@@ -2,8 +2,8 @@
     'use strict';
 
     /* create reference to .book-list and template*/
-    const bookContainer = document.querySelector('books-list');
-    const templateBook = document.querySelector('#template-book');
+    const bookContainer = document.querySelector('.books-list');
+    const templateBook = Handlebars.compile(document.querySelector('#template-book').innerHTML);
     const favoriteBooks = [];
 
     render();
@@ -25,29 +25,31 @@
     }
     /* Add initAcions function */
     function initActions() {
-    //    const thisBook = this;
-        /* prepare reference to list of all elements book_image in booksList list */
+        /* prepare reference to list of all elements book__image in booksList list */
         const books = bookContainer.querySelectorAll('.book__image');
         /* walk through every element in the list */
         for (let book of books) {
             /* add EventListener to each item in the list */
-            book.addEventListener('dbclick', function (event) {
+            book.addEventListener('dblclick', function (event) {
                 /* prevent default action */
                 event.preventDefault();
+                console.log('element clicked');
                 /* check if book isn't in avorite list */
                 if(!book.classList.contains('favorite')){
-                    /* add class favorite to every cdbclicked element */
+                    /* add class favorite to every dbclicked element */
                 book.classList.add('favorite');
                 /* get id from data-id id of the element */
                 const dataId = book.getAttribute('data-id');
                 /* add this id to favoriteBooks array */
                 favoriteBooks.push(dataId);
-                } else {
+                } 
+                else {
                     /* remove book from favoriteBooks array */
-                    favoriteBooks.indexOf(book).splice(book, 1);
+                    favoriteBooks.splice(book, 1);
                     /* remove class favorite from book */
                     book.classList.remove('favorite');
                 }
+                console.log(favoriteBooks);
             });
         }
     }
