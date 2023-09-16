@@ -26,32 +26,36 @@
     /* Add initAcions function */
     function initActions() {
         /* prepare reference to list of all elements book__image in booksList list */
-        const books = bookContainer.querySelectorAll('.book__image');
+        //    const books = bookContainer.querySelectorAll('.book__image');
         /* walk through every element in the list */
-        for (let book of books) {
-            /* add EventListener to each item in the list */
-            book.addEventListener('dblclick', function (event) {
-                /* prevent default action */
-                event.preventDefault();
-                console.log('element clicked');
-                /* check if book isn't in avorite list */
-                if(!book.classList.contains('favorite')){
+        //   for (let book of books) {
+        /* add EventListener to each item in the list */
+        /* modified */
+        bookContainer.addEventListener('dblclick', function (event) {
+            /* prevent default action */
+            event.preventDefault();
+            console.log('element clicked', event.target);
+            /* check if book isn't in avorite list */
+            if (event.target.offsetParent.classList.contains('book__image')) {
+                if (!event.target.offsetParent.classList.contains('favorite')) {
                     /* add class favorite to every dbclicked element */
-                book.classList.add('favorite');
-                /* get id from data-id id of the element */
-                const dataId = book.getAttribute('data-id');
-                /* add this id to favoriteBooks array */
-                favoriteBooks.push(dataId);
-                } 
+                    event.target.offsetParent.classList.add('favorite');
+                    /* get id from data-id id of the element */
+                    const dataId = event.target.offsetParent.getAttribute('data-id');
+                    /* add this id to favoriteBooks array */
+                    favoriteBooks.push(dataId);
+                }
                 else {
                     /* remove book from favoriteBooks array */
-                    favoriteBooks.splice(book, 1);
+                    favoriteBooks.splice(event.target.offsetParent.target, 1);
                     /* remove class favorite from book */
-                    book.classList.remove('favorite');
+                    event.target.offsetParent.classList.remove('favorite');
                 }
                 console.log(favoriteBooks);
-            });
-        }
+            }
+            console.log(favoriteBooks);
+        });
+        //    }
     }
     function addToFavorite() {
     }
