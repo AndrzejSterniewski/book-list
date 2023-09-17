@@ -4,10 +4,9 @@
     /* create reference to .book-list and template*/
     const bookContainer = document.querySelector('.books-list');
     const templateBook = Handlebars.compile(document.querySelector('#template-book').innerHTML);
-    const filtersForm = document.querySelectorAll('.filters input');
-
+    const filtersForm = document.querySelector('.filters');
     const favoriteBooks = [];
-    const filters = [];
+ //   const filters = [];
 
     render();
     initActions();
@@ -55,16 +54,11 @@
             console.log(favoriteBooks);
         });
         /* NEW */
-        for (let input of filtersForm) {
-            input.addEventListener('click', function () {
-                console.log('form clicked');
-                console.log(this);
-                if (this.tagName == 'INPUT' && this.type == 'checkbox' && this.name == 'filter') {
-                    console.log(this.value);
-                    console.log(this.checked);
-                }
-            });
-        }
+        filtersForm.addEventListener('click', function (event) {
+            if (event.target.tagName == 'INPUT' && event.target.type == 'checkbox' && event.target.name == 'filter') {
+                console.log(event.target.value, event.target.checked);
+            }
+        });
     }
     function addToFavorite() {
     }
