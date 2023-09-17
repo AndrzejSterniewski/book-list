@@ -6,7 +6,7 @@
     const templateBook = Handlebars.compile(document.querySelector('#template-book').innerHTML);
     const filtersForm = document.querySelector('.filters');
     const favoriteBooks = [];
- //   const filters = [];
+    const filters = [];
 
     render();
     initActions();
@@ -57,6 +57,8 @@
         filtersForm.addEventListener('click', function (event) {
             if (event.target.tagName == 'INPUT' && event.target.type == 'checkbox' && event.target.name == 'filter') {
                 console.log(event.target.value, event.target.checked);
+                (event.target.checked) ? filters.push(event.target.value) : filters.splice('event.target', 1);
+                console.log(filters);
             }
         });
     }
