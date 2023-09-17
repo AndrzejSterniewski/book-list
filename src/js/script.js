@@ -4,7 +4,10 @@
     /* create reference to .book-list and template*/
     const bookContainer = document.querySelector('.books-list');
     const templateBook = Handlebars.compile(document.querySelector('#template-book').innerHTML);
+    const filtersForm = document.querySelectorAll('.filters input');
+
     const favoriteBooks = [];
+    const filters = [];
 
     render();
     initActions();
@@ -27,10 +30,6 @@
     function initActions() {
         /* prepare reference to list of all elements book__image in booksList list */
         //    const books = bookContainer.querySelectorAll('.book__image');
-        /* walk through every element in the list */
-        //   for (let book of books) {
-        /* add EventListener to each item in the list */
-        /* modified */
         bookContainer.addEventListener('dblclick', function (event) {
             /* prevent default action */
             event.preventDefault();
@@ -55,7 +54,17 @@
             }
             console.log(favoriteBooks);
         });
-        //    }
+        /* NEW */
+        for (let input of filtersForm) {
+            input.addEventListener('click', function () {
+                console.log('form clicked');
+                console.log(this);
+                if (this.tagName == 'INPUT' && this.type == 'checkbox' && this.name == 'filter') {
+                    console.log(this.value);
+                    console.log(this.checked);
+                }
+            });
+        }
     }
     function addToFavorite() {
     }
