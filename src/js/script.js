@@ -17,22 +17,26 @@
         const thisBook = this;
         /* walk through every element in dataSource.books */
         for (let elem in dataSource.books) {
-            //   console.log(dataSource.books[elem].rating);
-            //    const ratingBgc = determineRatingBgc(dataSource.books[elem].rating);
-            //    const rankingWidth = dataSource.books[elem].rating * 10;
+            console.log('elem.rating', dataSource.books[elem].rating);
+            const ratingBgc = determineRatingBgc(dataSource.books[elem].rating);
+            console.log(ratingBgc);
+            const ratingWidth = dataSource.books[elem].rating * 10;
+            console.log(ratingWidth);
             /* generate HTML code based on template and each book data */
-            const generatedHTML = templateBook(dataSource.books[elem]);
+        //    const generatedHTML = templateBook(dataSource.books[elem]);
 
-            // handlebar:
-            //    { ratingBgc: ratingBgc, rankingWidth: rankingWidth };
-
+            console.log(dataSource.books[elem]);
             /* NEW */
-            // const generatedHTML = {
-            //     templateBook: dataSource.books[elem],
-            //     ratingBgc: ratingBgc,
-            //     rankingWidth: rankingWidth,
-            //   };
-
+            const bookDataTemplate = {
+                name: dataSource.books[elem].name,
+                price: dataSource.books[elem].price,
+                id: dataSource.books[elem].id,
+                image: dataSource.books[elem].image,
+                ratingWidth: ratingWidth,
+                ratingBgc: ratingBgc,
+                rating: dataSource.books[elem].rating,
+            };
+            const generatedHTML = templateBook(bookDataTemplate);
             /* generate DOM element based on generated HTML */
             thisBook.element = utils.createDOMFromHTML(generatedHTML);
             /* add generated DOM element as a child element to the .books-list */
@@ -79,7 +83,7 @@
     function filterBooks() {
         for (let book of dataSource.books) {
             let shouldBeHidden = false;
-            let activeBook = document.querySelector('.book__image[data-id="' + book.id +'"]');       
+            let activeBook = document.querySelector('.book__image[data-id="' + book.id + '"]');
             for (const filter of filters) {
                 if (!book.details[filter] == true) {
                     shouldBeHidden = true;
@@ -95,13 +99,13 @@
     }
     function determineRatingBgc(rating) {
         if (rating < 6) {
-            return 'background: linear-gradient(to bottom,  #fefcea 0%, #f1da36 100%)';
+            return 'linear-gradient(to bottom,  #fefcea 0%, #f1da36 100%)';
         } else if (rating > 6 && rating <= 8) {
-            return 'background: linear-gradient(to bottom, #b4df5b 0%,#b4df5b 100%)';
+            return 'linear-gradient(to bottom, #b4df5b 0%,#b4df5b 100%)';
         } else if (rating > 8 && rating <= 9) {
-            return 'background: linear-gradient(to bottom, #299a0b 0%, #299a0b 100%)';
+            return 'linear-gradient(to bottom, #299a0b 0%, #299a0b 100%)';
         } else if (rating > 9) {
-            return 'background: linear-gradient(to bottom, #ff0084 0%,#ff0084 100%)';
+            return 'linear-gradient(to bottom, #ff0084 0%,#ff0084 100%)';
         }
     }
 }
